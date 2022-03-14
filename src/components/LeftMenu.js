@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { FaSpotify, FaEllipsisH } from 'react-icons/fa'
 import { BiSearchAlt } from 'react-icons/bi'
+import MenuList from './MenuList'
+import menuData from '../assets/menuData'
 const LeftMenu = () => {
     return (
         <Wrapper>
@@ -18,6 +20,8 @@ const LeftMenu = () => {
                     <BiSearchAlt />
                 </i>
             </div>
+            {/* make it reusable component since we will need it in the future */}
+            <MenuList title={'menu'} objectList={menuData} />
         </Wrapper>
     )
 }
@@ -28,7 +32,7 @@ const Wrapper = styled.section`
     min-height: 100vh;
     background: rgba(34,34,34,0.6);
     backdrop-filter: blur(10px);
-    padding: 25px 30px;
+    padding: 20px 15px;
     overflow: hidden;
     transition: all 0.3s ease;
     .logo-container {

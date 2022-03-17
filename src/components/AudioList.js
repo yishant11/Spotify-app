@@ -1,19 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import styled from 'styled-components'
 import songs from '../assets/songs'
 import SingleSong from './SingleSong'
 
 const AudioList = () => {
+    const [songsList, setSongsList] = useState(songs)
+    const changeFavourite = (id) => {
+        console.log(id);
+        //find song by finding id of clicked item, and change favourite status of this song
+        const newSongs = songsList.map(song => {
+            if (song.id === id) {
+
+                return { ...song, favourite: !song.favourite }
+            }
+            else {
+                return song;
+            }
+        })
+        setSongsList(newSongs);
+
+    }
     return (
         <Wrapper>
             <h2 className='title'>
-                The list <span>{songs.length} songs</span>
+                The list <span>{songsList.length} songs</span>
             </h2>
             <div className="songs-container">
                 {
-                    songs.map(item => {
-                        return <SingleSong {...item} />
+                    songsList.map(item => {
+                        return <SingleSong key={item.id} changeFavourite={changeFavourite} {...item} />
                     })
                 }
             </div>

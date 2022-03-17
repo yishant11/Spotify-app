@@ -2,10 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import { FaHeadphones, FaHeart, FaRegClock, FaRegHeart } from 'react-icons/fa'
 
-const SingleSong = ({ id, favourite, songName, artist, song, imgSrc }) => {
+const SingleSong = ({ id, favourite, songName, artist, song, imgSrc, changeFavourite }) => {
+
     return (
         <Wrapper>
-            <div key={id} className="songs">
+            <div className="songs">
                 <div className="count">#{id}</div>
                 <div className="song">
                     <div className="img-container">
@@ -25,7 +26,7 @@ const SingleSong = ({ id, favourite, songName, artist, song, imgSrc }) => {
                                 <i><FaRegClock /></i>
                                 03.04
                             </p>
-                            <div className="favourite">
+                            <div onClick={() => changeFavourite(id)} className="favourite">
                                 {/* if favourite show full heart if not show empty heart */}
                                 {favourite ? <i><FaHeart /></i> : <i><FaRegHeart /></i>}
                             </div>

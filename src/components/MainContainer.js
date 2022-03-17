@@ -1,10 +1,54 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { FaUsers } from 'react-icons/fa'
 import styled from 'styled-components'
 import Banner from './Banner'
 const MainContainer = () => {
+    //once component loads get items from page and set click event on them
+    //just testing different approach
+    useEffect(() => {
+        const allLis = document.querySelectorAll('.menutabs li')
+        console.log(allLis)
+        allLis.forEach(item => {
+            item.addEventListener('click', (e) => {
+                //get clicked element
+                const target = e.currentTarget;
+                //remove active class from all li elements
+                allLis.forEach(item => item.classList.remove('active'));
+                //add active class to clicked element
+                if (item === target) {
+                    item.classList.add('active');
+                }
+            })
+        })
+    }, [])
     return (
         <Wrapper>
             <Banner />
+            <div className="menutabs">
+                <ul>
+                    <li>
+                        <a href="#">Popular</a>
+                    </li>
+                    <li>
+                        <a href="#">Albums</a>
+                    </li>
+                    <li>
+                        <a href="#">Songs</a>
+                    </li>
+                    <li>
+                        <a href="#">Fans</a>
+                    </li>
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                </ul>
+                <p>
+                    <i>
+                        <FaUsers />
+                    </i>
+                    <span>12.3M Followers</span>
+                </p>
+            </div>
         </Wrapper>
     )
 }
@@ -16,6 +60,69 @@ const Wrapper = styled.section`
     backdrop-filter: blur(10px);
     background: rgba(34,34,34, 0.6);
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    .menutabs {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 25px;
+        background: #2c2c2c;
+        ul {
+            padding-left: 30px;
+            display: flex;
+            align-items: center;
+            li {
+                list-style: none;
+                margin: 0 20px;
+                position: relative;
+                a {
+                    text-decoration: none;
+                    color: #848484;
+                }
+                :before {
+                    position: absolute;
+                    content: '';
+                    bottom: -20px;
+                    left: 5px;
+                    width: 0px;
+                    height: 5px;
+                    border-radius: 5px;
+                    background: #f1f1f1;
+                }
+                :hover::before {
+                    width: 70%;
+                    transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                }
+                .active a {
+                    color: #f1f1f1;
+                    transition: 0.3s;
+                }
+            }
+            li.active:before {
+                width: 70%;
+                transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            }
+        }
+        p {
+            color: #f1f1f1;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            i {
+                display: grid;
+                place-items: center;
+                margin-right: 6px;
+                font-size: 14px;
+                text-align: center;
+            }
+            span {
+                /* display: block; */
+                font-size: 14px;
+                text-align: center;
+                color: #848484;
+                /* line-height: 14px; */
+            }
+        }
+    }
     
 `
 export default MainContainer

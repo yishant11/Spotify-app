@@ -1,6 +1,7 @@
 import React from 'react'
 import { FaHeadphones, FaHeart, FaRegClock, FaRegHeart } from 'react-icons/fa'
 import styled from 'styled-components'
+import songs from '../assets/songs'
 
 const AudioList = () => {
     return (
@@ -9,7 +10,40 @@ const AudioList = () => {
                 The list <span>12 songs</span>
             </h2>
             <div className="songs-container">
-                <div className="songs">
+                {songs.map((item, index) => {
+                    const { id, favourite, songName, artist, song, imgSrc } = item;
+                    return (
+                        <div key={id} className="songs">
+                            <div className="count">#{index}</div>
+                            <div className="song">
+                                <div className="img-container">
+                                    <img src={imgSrc} alt={artist} />
+                                </div>
+                                <div className="song-info">
+                                    <p className="song-name">
+                                        {songName}
+                                        <span>{artist}</span>
+                                    </p>
+                                    <div className="hits">
+                                        <p className="hit">
+                                            <i><FaHeadphones /></i>
+                                            95,490,102
+                                        </p>
+                                        <p className="duration">
+                                            <i><FaRegClock /></i>
+                                            03.04
+                                        </p>
+                                        <div className="favourite">
+                                            <i><FaHeart /></i>
+                                            <i><FaRegHeart /></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                })}
+                {/* <div className="songs">
                     <div className="count">#01</div>
                     <div className="song">
                         <div className="img-container">
@@ -36,7 +70,7 @@ const AudioList = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </Wrapper>
     )

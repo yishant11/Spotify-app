@@ -1,7 +1,7 @@
 const songs = [
     {
         id: 1,
-        favourite: false,
+        favourite: true,
         songName: "Bella Ciao",
         artist: "El Profesor",
         song: "https://firebasestorage.googleapis.com/v0/b/spotify-clone-7a2ef.appspot.com/o/Ringtone%2Fbellaciao.mp3?alt=media&token=e1dd8233-3521-4574-8957-d51af9a5db5c",

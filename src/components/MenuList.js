@@ -1,19 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 const MenuList = ({ title, objectList }) => {
     // console.log(title, objectList);
     //active link by default will be first
     const [active, setActive] = useState(objectList[0].name)
     //handle active link change
-    const handleActive = (id) => {
+    const handleClick = (id) => {
         //find item by clicked id
         const clickedItem = objectList.find(item => item.id === id);
         //set active name to clicked item name
         setActive(clickedItem.name)
     }
-    useEffect(() => {
-
-    }, [])
     return (
         <Wrapper>
             <h2>{title}</h2>
@@ -22,7 +19,7 @@ const MenuList = ({ title, objectList }) => {
                     const { id, icon, name } = item;
                     return (
                         // add active class if it have same name as in state
-                        <li className={active === name ? 'active' : null} onClick={() => handleActive(id)} key={id}>
+                        <li className={active === name ? 'active' : null} onClick={() => handleClick(id)} key={id}>
                             <a href="#">
                                 <i>
                                     {icon}

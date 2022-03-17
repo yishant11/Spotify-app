@@ -4,6 +4,8 @@ import { FaSpotify, FaEllipsisH } from 'react-icons/fa'
 import { BiSearchAlt } from 'react-icons/bi'
 import MenuList from './MenuList'
 import menuData from '../assets/menuData'
+import MenuPlaylist from './MenuPlaylist'
+import TrackList from './TrackList'
 const LeftMenu = () => {
     return (
         <Wrapper>
@@ -22,6 +24,10 @@ const LeftMenu = () => {
             </div>
             {/* make it reusable component since we will need it in the future */}
             <MenuList title={'menu'} objectList={menuData} />
+            {/* PlayList */}
+            <MenuPlaylist />
+            {/* TrackList */}
+            <TrackList />
         </Wrapper>
     )
 }

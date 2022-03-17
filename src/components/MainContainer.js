@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { FaUsers } from 'react-icons/fa'
 import styled from 'styled-components'
+import AudioList from './AudioList'
 import Banner from './Banner'
 const MainContainer = () => {
     //once component loads get items from page and set click event on them
@@ -23,7 +24,9 @@ const MainContainer = () => {
     }, [])
     return (
         <Wrapper>
+            {/* Banner */}
             <Banner />
+            {/* TABS */}
             <div className="menutabs">
                 <ul>
                     <li>
@@ -49,6 +52,8 @@ const MainContainer = () => {
                     <span>12.3M Followers</span>
                 </p>
             </div>
+            {/* Audio List */}
+            <AudioList />
         </Wrapper>
     )
 }

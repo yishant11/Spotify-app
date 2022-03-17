@@ -40,6 +40,7 @@ const Wrapper = styled.section`
     backdrop-filter: blur(10px);
     padding: 20px 15px;
     overflow: hidden;
+    z-index: 1;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.27);
     .logo-container {
         color: #f1f1f1;

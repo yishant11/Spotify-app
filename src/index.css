@@ -20,3 +20,9 @@ code {
 *::-webkit-scrollbar {
   display: none;
 }
+
+@media screen and (max-width: 550px) {
+  .left-menu {
+    width: 64px;
+  }
+}

@@ -5,7 +5,7 @@ import { BsMusicNoteList, BsTrash } from 'react-icons/bs'
 import playlist from '../assets/playlist'
 const MenuPlaylist = () => {
     return (
-        <Wrapper>
+        <Wrapper className='menu-playlist'>
             <div className="name-container">
                 <p>PlayList</p>
                 <i><FaPlus /></i>
@@ -70,6 +70,9 @@ const Wrapper = styled.div`
     }
     .trash {
          cursor: pointer;   
+    }
+     @media screen and (max-width: 550px) {
+        display: none;
     }
     
 `

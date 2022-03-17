@@ -5,7 +5,7 @@ import { FaDesktop } from 'react-icons/fa'
 import track from '../img/track.png'
 const TrackList = () => {
     return (
-        <Wrapper>
+        <Wrapper className='tracklist'>
             <div className="top">
                 <img src={track} alt="track name" />
                 <p>sample name <span>artist</span> </p>
@@ -119,6 +119,9 @@ const Wrapper = styled.div`
         box-sizing: border-box;
         transition: all 250ms linear;
      }
+     @media screen and (max-width: 550px) {
+        display: none;
+    }
 `
 
 export default TrackList

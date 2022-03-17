@@ -8,7 +8,7 @@ import MenuPlaylist from './MenuPlaylist'
 import TrackList from './TrackList'
 const LeftMenu = () => {
     return (
-        <Wrapper>
+        <Wrapper className='left-menu'>
             <div className="logo-container">
                 <i><FaSpotify /></i>
                 <h2>Spotify</h2>
@@ -40,7 +40,7 @@ const Wrapper = styled.section`
     backdrop-filter: blur(10px);
     padding: 20px 15px;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.27);
     .logo-container {
         color: #f1f1f1;
         display: flex;
@@ -88,6 +88,15 @@ const Wrapper = styled.section`
             text-align: center;
             /* transform: translateY(50%); */
             color: #848484;
+        }
+    }
+    @media screen and (max-width: 550px) {
+        width: 64px;
+        .search-box {
+            display: none;
+        }
+        .logo-container h2 {
+            margin-left: 20px;
         }
     }
 

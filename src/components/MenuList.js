@@ -12,7 +12,7 @@ const MenuList = ({ title, objectList }) => {
         setActive(clickedItem.name)
     }
     return (
-        <Wrapper>
+        <Wrapper className='menu-list'>
             <h2>{title}</h2>
             <ul>
                 {objectList.map(item => {
@@ -93,6 +93,25 @@ const Wrapper = styled.div`
         visibility: visible;
         opacity: 1;
         transition: 0.5s;
+    }
+     @media screen and (max-width: 550px) {
+        span {
+            display: none;
+        };
+        i {
+            font-size: 26px;
+        }
+        li {
+            margin: 25px 0;
+        }
+        li a {
+            display: grid;
+            place-items: center;
+        }
+        li a i{
+            margin-right: 0;
+        }
+        
     }
     
 `

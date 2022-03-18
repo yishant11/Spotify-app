@@ -9,12 +9,16 @@ const MusicPlayer = ({ currentSong, changeFavourite }) => {
     const [isPlaying, setIsPlaying] = useState(false);
     //state for duration
     const [duration, setDuration] = useState(0);
+    //state for current playing time of song
+    const [currentTime, setCurrentTime] = useState(0);
     //state for loading
     const [isLoading, setIsLoading] = useState(false);
     //ref for audio player tag
     const audioPlayer = useRef();
     //ref for progress bar
     const progressBar = useRef();
+    //animation ref
+    const animationRef = useRef();
     const changeLoved = () => {
         setisLoved(!isLoved)
     }
@@ -24,20 +28,40 @@ const MusicPlayer = ({ currentSong, changeFavourite }) => {
         setIsPlaying(!isPlaying);
         if (!isPlaying) {
             audioPlayer.current.play();
+            animationRef.current = requestAnimationFrame(whilePlaying)
         } else {
             audioPlayer.current.pause();
+            cancelAnimationFrame(animationRef.current)
         }
     }
+    //CHange Progress bar during audio play
+    const whilePlaying = () => {
+        progressBar.current.value = audioPlayer.current.currentTime;
+        changeCurrentTime();
+        //needs to run more than once
+        animationRef.current = requestAnimationFrame(whilePlaying)
+    }
+    const changeCurrentTime = () => {
+        progressBar.current.style.setProperty(
+            '--played-width',
+            `${(progressBar.current.value / duration) * 100}%`);
+        setCurrentTime(progressBar.current.value);
+    }
+    const changeProgress = () => {
+        audioPlayer.current.currentTime = progressBar.current.value;
+        changeCurrentTime();
+    }
+
     //useEffect for audio player
     //we need to execute useeffect each time when audioplayer is loaded and we changing currentSong
     //and in ready state, !!! use optional chaining so we wont get an error
     useEffect(() => {
-
-        const seconds = audioPlayer.current.duration;
+        const seconds = Math.floor(audioPlayer.current.duration);
         setDuration(seconds);
-
-
+        // set max prop with out seconds in input[range]
+        progressBar.current.max = seconds;
     }, [currentSong, audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
+
     //function helper to calculate duration
     const CalculateTime = (num) => {
         const minutes = Math.floor(num / 60);
@@ -90,8 +114,14 @@ const MusicPlayer = ({ currentSong, changeFavourite }) => {
                     </div>
                 </div>
                 <div className="bottom">
-                    <div className="current-time">{ }</div>
-                    <input ref={progressBar} className='progress-bar' type="range" />
+                    <div className="current-time">{CalculateTime(currentTime)}</div>
+                    <input
+                        onChange={changeProgress}
+                        ref={progressBar}
+                        className='progress-bar'
+                        type="range"
+                        defaultValue="0"
+                    />
                     <div className="duration">
                         {/* check duration so we wont have NaN displayed in duration */}
                         {(duration && !isNaN(duration) ? CalculateTime(duration) : '00:00')}
@@ -104,6 +134,7 @@ const MusicPlayer = ({ currentSong, changeFavourite }) => {
 const Wrapper = styled.section`
     width: 100%;
     padding: 10px;
+    padding-top: 20px;
     display: flex;
     .song-image {
         width: 120px;
@@ -147,6 +178,7 @@ const Wrapper = styled.section`
             filter: drop-shadow(0px 0px 20px #49e12e)
         }
         .top {
+            padding-bottom: 10px;
             .middle {
                 .back i:nth-child(2), .forward i:nth-child(1) {
                     color: #9a9a9a !important;
@@ -194,7 +226,7 @@ const Wrapper = styled.section`
             top: 0;
             left: 0;
             background: #848484;
-            width: 50%;
+            width: var(--played-width);
             height: 100%;
             border-radius: 10px;
             z-index: 2;
@@ -223,7 +255,7 @@ const Wrapper = styled.section`
         }
         .progress-bar::-moz-range-progress {
             background: #848484;
-            width: 50%;
+            width:var(--played-width);
             height: 100%;
             border-radius: 10px;
             z-index: 2;

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import styled from 'styled-components'
 import songs from '../assets/songs'
+import MusicPlayer from './MusicPlayer'
 import SingleSong from './SingleSong'
 
 const AudioList = () => {
@@ -10,12 +11,10 @@ const AudioList = () => {
     //change currentSong
     const changeSong = (id) => {
         const newSong = songsList.find(item => item.id === id);
-        console.log(newSong);
         setCurrentSong(newSong);
     }
     //change favourite
     const changeFavourite = (id) => {
-        console.log(id);
         //find song by finding id of clicked item, and change favourite status of this song
         const newSongs = songsList.map(song => {
             if (song.id === id) {
@@ -29,6 +28,7 @@ const AudioList = () => {
         setSongsList(newSongs);
 
     }
+
     return (
         <Wrapper>
             <h2 className='title'>
@@ -41,6 +41,7 @@ const AudioList = () => {
                     })
                 }
             </div>
+            <MusicPlayer changeFavourite={changeFavourite} currentSong={currentSong} />
         </Wrapper>
     )
 }

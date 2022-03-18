@@ -2,11 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import { FaHeadphones, FaHeart, FaRegClock, FaRegHeart } from 'react-icons/fa'
 
-const SingleSong = ({ id, favourite, songName, artist, song, imgSrc, changeFavourite }) => {
+const SingleSong = ({ id, favourite, songName, artist, song, imgSrc, changeFavourite, changeSong }) => {
 
     return (
         <Wrapper>
-            <div className="songs">
+            <div onClick={() => changeSong(id)} className="songs">
                 <div className="count">#{id}</div>
                 <div className="song">
                     <div className="img-container">
@@ -47,6 +47,7 @@ const Wrapper = styled.div`
         width: 100%;
         margin: 10px 0;
         padding: 5px;
+        cursor: pointer;
         /* padding-bottom: ; */
         .count {
             margin-right: 10px;

@@ -5,7 +5,15 @@ import songs from '../assets/songs'
 import SingleSong from './SingleSong'
 
 const AudioList = () => {
-    const [songsList, setSongsList] = useState(songs)
+    const [songsList, setSongsList] = useState(songs);
+    const [currentSong, setCurrentSong] = useState(songs[0]);
+    //change currentSong
+    const changeSong = (id) => {
+        const newSong = songsList.find(item => item.id === id);
+        console.log(newSong);
+        setCurrentSong(newSong);
+    }
+    //change favourite
     const changeFavourite = (id) => {
         console.log(id);
         //find song by finding id of clicked item, and change favourite status of this song
@@ -29,7 +37,7 @@ const AudioList = () => {
             <div className="songs-container">
                 {
                     songsList.map(item => {
-                        return <SingleSong key={item.id} changeFavourite={changeFavourite} {...item} />
+                        return <SingleSong key={item.id} changeSong={changeSong} changeFavourite={changeFavourite} {...item} />
                     })
                 }
             </div>

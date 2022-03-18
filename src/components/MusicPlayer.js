@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import styled from 'styled-components'
 import { FaRegHeart, FaHeart, FaStepBackward, FaBackward, FaPlay, FaPause, FaForward, FaStepForward, FaShareAlt } from 'react-icons/fa'
 import { BsDownload } from 'react-icons/bs'
@@ -7,9 +7,15 @@ const MusicPlayer = ({ currentSong, changeFavourite }) => {
     const [isLoved, setisLoved] = useState(favourite);
     //state for playing
     const [isPlaying, setIsPlaying] = useState(false);
+    //ref for audio player tag
+    const audioPlayer = useRef();
+    //ref for progress bar
+    const progressBar = useRef();
     const changeLoved = () => {
         setisLoved(!isLoved)
     }
+
+    //Play/pause functionality
     return (
         <Wrapper>
             <div className="song-image">
@@ -48,7 +54,11 @@ const MusicPlayer = ({ currentSong, changeFavourite }) => {
                         <i><FaShareAlt /></i>
                     </div>
                 </div>
-                <div className="bottom"></div>
+                <div className="bottom">
+                    <div className="current-time">00:00</div>
+                    <input className='progress-bar' type="range" />
+                    <div className="duration">00:24</div>
+                </div>
             </div>
         </Wrapper>
     )
@@ -116,6 +126,78 @@ const Wrapper = styled.section`
                 align-items: center;
                 color: #000;
             }
+        }
+        .bottom {
+            margin-bottom: 20px;
+            padding: 0 15px;
+            .progress-bar {
+                width: 70%;
+                position: relative;
+                height: 5px;
+                outline: none;
+                border: none;
+                appearance: none;
+                border-radius: 10px;
+                background: rgba(255, 255, 255, 0.1);
+            }
+            .current-time, .duration {
+                color: #f1f1f1;
+                font-size: 14px;
+                font-weight: bold;
+            }
+        }
+    }
+
+    /* Chrome & Safari */
+    .bottom {
+        .progress-bar::before {
+            position: absolute;
+            content: '';
+            top: 0;
+            left: 0;
+            background: #848484;
+            width: 50%;
+            height: 100%;
+            border-radius: 10px;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+        .progress-bar::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            border: none;
+            outline: none;
+        }
+    }
+    /* Firefox */
+    .bottom {
+        .progress-bar::-moz-range-track {
+            width: 78%;
+            height: 5px;
+            outline: none;
+            border: none;
+            appearance: none;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
+            cursor: pointer
+        }
+        .progress-bar::-moz-range-progress {
+            background: #848484;
+            width: 50%;
+            height: 100%;
+            border-radius: 10px;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+        .progress-bar::-moz-range-thumb {
+            -webkit-appearance: none;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            border: none;
+            outline: none;
         }
     }
 

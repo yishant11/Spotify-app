@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
 import { FaRegHeart, FaHeart, FaStepBackward, FaBackward, FaPlay, FaPause, FaForward, FaStepForward, FaShareAlt } from 'react-icons/fa'
 import { BsDownload } from 'react-icons/bs'
@@ -7,6 +7,10 @@ const MusicPlayer = ({ currentSong, changeFavourite }) => {
     const [isLoved, setisLoved] = useState(favourite);
     //state for playing
     const [isPlaying, setIsPlaying] = useState(false);
+    //state for duration
+    const [duration, setDuration] = useState(0);
+    //state for loading
+    const [isLoading, setIsLoading] = useState(false);
     //ref for audio player tag
     const audioPlayer = useRef();
     //ref for progress bar
@@ -24,6 +28,28 @@ const MusicPlayer = ({ currentSong, changeFavourite }) => {
             audioPlayer.current.pause();
         }
     }
+    //useEffect for audio player
+    //we need to execute useeffect each time when audioplayer is loaded and we changing currentSong
+    //and in ready state, !!! use optional chaining so we wont get an error
+    useEffect(() => {
+
+        const seconds = audioPlayer.current.duration;
+        setDuration(seconds);
+
+
+    }, [currentSong, audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
+    //function helper to calculate duration
+    const CalculateTime = (num) => {
+        const minutes = Math.floor(num / 60);
+        // < 10 -> 09 or 11, 12 etc.
+        const returnMin = minutes < 10 ? `0${minutes}` : `${minutes}`;
+        const seconds = Math.floor(num % 60);
+        const returnSec = seconds < 10 ? `0${seconds}` : `${seconds}`;
+
+        return `${returnMin}:${returnSec}`
+
+    }
+
     return (
         <Wrapper>
             <div className="song-image">
@@ -64,9 +90,12 @@ const MusicPlayer = ({ currentSong, changeFavourite }) => {
                     </div>
                 </div>
                 <div className="bottom">
-                    <div className="current-time">00:00</div>
+                    <div className="current-time">{ }</div>
                     <input ref={progressBar} className='progress-bar' type="range" />
-                    <div className="duration">00:24</div>
+                    <div className="duration">
+                        {/* check duration so we wont have NaN displayed in duration */}
+                        {(duration && !isNaN(duration) ? CalculateTime(duration) : '00:00')}
+                    </div>
                 </div>
             </div>
         </Wrapper>

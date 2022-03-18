@@ -37,7 +37,7 @@ const AudioList = () => {
             <div className="songs-container">
                 {
                     songsList.map(item => {
-                        return <SingleSong key={item.id} changeSong={changeSong} changeFavourite={changeFavourite} {...item} />
+                        return <SingleSong key={item.id} currentSong={currentSong} changeSong={changeSong} changeFavourite={changeFavourite} {...item} />
                     })
                 }
             </div>

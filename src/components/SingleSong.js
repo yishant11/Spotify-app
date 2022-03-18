@@ -2,11 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import { FaHeadphones, FaHeart, FaRegClock, FaRegHeart } from 'react-icons/fa'
 
-const SingleSong = ({ id, favourite, songName, artist, song, imgSrc, changeFavourite, changeSong }) => {
+const SingleSong = ({ id, favourite, songName, artist, currentSong, imgSrc, changeFavourite, changeSong }) => {
 
     return (
         <Wrapper>
-            <div onClick={() => changeSong(id)} className="songs">
+            {/* add active class if id of song equals current song id in state then add active class */}
+            <div onClick={() => changeSong(id)} className={id === currentSong.id ? 'songs active' : 'songs'}>
                 <div className="count">#{id}</div>
                 <div className="song">
                     <div className="img-container">

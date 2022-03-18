@@ -16,6 +16,14 @@ const MusicPlayer = ({ currentSong, changeFavourite }) => {
     }
 
     //Play/pause functionality
+    const changePlayState = () => {
+        setIsPlaying(!isPlaying);
+        if (!isPlaying) {
+            audioPlayer.current.play();
+        } else {
+            audioPlayer.current.pause();
+        }
+    }
     return (
         <Wrapper>
             <div className="song-image">
@@ -23,7 +31,8 @@ const MusicPlayer = ({ currentSong, changeFavourite }) => {
             </div>
             <div className="song-attributes">
                 <audio
-                    src=""
+                    ref={audioPlayer}
+                    src={song}
                     preload='metadata'
                 />
                 <div className="top">
@@ -42,7 +51,7 @@ const MusicPlayer = ({ currentSong, changeFavourite }) => {
                             <i><FaStepBackward /></i>
                             <i><FaBackward /></i>
                         </div>
-                        <div className="playPause" onClick={() => setIsPlaying(!isPlaying)}>
+                        <div className="playPause" onClick={() => changePlayState()}>
                             {isPlaying ? <i><FaPause /></i> : <i><FaPlay /></i>}
                         </div>
                         <div className="forward">
@@ -56,7 +65,7 @@ const MusicPlayer = ({ currentSong, changeFavourite }) => {
                 </div>
                 <div className="bottom">
                     <div className="current-time">00:00</div>
-                    <input className='progress-bar' type="range" />
+                    <input ref={progressBar} className='progress-bar' type="range" />
                     <div className="duration">00:24</div>
                 </div>
             </div>

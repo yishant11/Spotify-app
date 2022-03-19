@@ -6,8 +6,12 @@ const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
     //song list
     const [songsList, setSongsList] = useState(songs);
+    //state for index of current song
+    const [indexOfSong, setIndexOfSong] = useState(0);
     //current active song
-    const [currentSong, setCurrentSong] = useState(songs[0]);
+    const [currentSong, setCurrentSong] = useState(songs[indexOfSong]);
+
+
     //change currentSong
     const changeSong = (id) => {
         const newSong = songsList.find(item => item.id === id);
@@ -78,11 +82,11 @@ const AppProvider = ({ children }) => {
     }
 
     //useEffect for disabling play state if song ends
-    useEffect(() => {
-        if (currentTime >= duration) {
-            setIsPlaying(false);
-        }
-    }, [currentTime])
+    // useEffect(() => {
+    //     if (currentTime >= duration) {
+    //         setIsPlaying(false);
+    //     }
+    // }, [currentTime])
 
     //useEffect for audio player
     //we need to execute useeffect each time when audioplayer is loaded and we changing currentSong
@@ -105,6 +109,21 @@ const AppProvider = ({ children }) => {
         return `${returnMin}:${returnSec}`
 
     }
+
+    // AUTO PLAY FUNCTIONALITY
+    useEffect(() => {
+        if (currentTime >= duration) {
+            setIndexOfSong((oldIndex) => {
+                return oldIndex + 1;
+            })
+            setCurrentSong(songsList[indexOfSong])
+        }
+    }, [currentTime])
+
+    useEffect(() => {
+        audioPlayer.current.pause();
+        audioPlayer.current.play();
+    }, [currentSong, audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
 
 
 

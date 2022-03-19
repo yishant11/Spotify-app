@@ -65,6 +65,13 @@ const MusicPlayer = ({ currentSong, changeFavourite }) => {
         progressBar.current.max = seconds;
     }, [currentSong, audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
 
+    //useEffect for disabling play state if song ends
+    useEffect(() => {
+        if (currentTime >= duration) {
+            setIsPlaying(false);
+        }
+    }, [currentTime])
+
     //function helper to calculate duration
     const CalculateTime = (num) => {
         const minutes = Math.floor(num / 60);

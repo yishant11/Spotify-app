@@ -123,6 +123,7 @@ const AppProvider = ({ children }) => {
                     return oldIndex + 1;
                 }
             })
+            //dont setup new song if reached end of playlist or it will cause an error
             if (indexOfSong !== songsList.length) {
                 setCurrentSong(songsList[indexOfSong])
             }

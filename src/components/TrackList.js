@@ -55,73 +55,61 @@ const Wrapper = styled.div`
                 transition: 0.3s;
                 cursor: pointer; 
         }
-        input {
-            position: relative;
-            height: 5px;
-            border: none;
-            outline: none;
-            border-radius: 5px;
-            background: rgba(255,255,255,0.1);
-            appearance: none;
-        }
+    input[type='range'] {
+      overflow: hidden;
+      width: 80px;
+      height: 10px;
+      -webkit-appearance: none;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      outline: none;
+      border-radius: 10px;
+      cursor: pointer;
     }
     // Chrome & Safari
-    .bottom input::before {
-        position: absolute;
-        content: '';
-        top: 0;
-        left: 0;
-        background: #49e12e;
-        width: 50%;
-        height: 100%;
-        border-radius: 10px;
-        z-index: 2;
-        transition: width 250ms linear;
+    input[type='range']::-webkit-slider-runnable-track {
+      height: 10px;
+      -webkit-appearance: none;
+      color: #49e12e;
+      margin-top: -1px;
     }
-    .bottom input::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        width: 10px;
-        height: 20px;
-        border-radius: 10px;
-        background: #f1f1f1;
-        border: 2px solid #000;
-        cursor: pointer;
-        position: relative;
-        margin: -2px 0 0 0;
-        z-index: 3;
-        box-sizing: border-box;
-        transition: all 250ms linear;
+    
+    input[type='range']::-webkit-slider-thumb {
+      width: 10px;
+      -webkit-appearance: none;
+      /* height: 100%; */
+      width: 10px;
+      height: 20px;
+      border-radius: 10px;
+      border: 2px solid #000;
+      margin: -3px 0 0 0;
+      background: #f1f1f1;
+      border-radius: 5px;
+      transition: all 250ms linear;
+      box-sizing: border-box;
+      box-shadow: -80px 0 0 80px #49e12e;
+      cursor: pointer;
     }
-    // firefox
-    .bottom input::-moz-progress-bar {
-        /* position: absolute;
-        content: '';
-        top: 0;
-        left: 0; */
-        background: #49e12e;
-        width: 50%;
-        height: 100%;
-        border-radius: 10px;
-        z-index: 2;
-        transition: width 250ms linear;
     }
-     .bottom input::-moz-range-thumb {
-        -webkit-appearance: none;
-        width: 10px;
-        height: 20px;
-        border-radius: 10px;
-        background: #f1f1f1;
-        border: 2px solid #000;
-        cursor: pointer;
-        position: relative;
-        margin: -2px 0 0 0;
-        z-index: 3;
-        box-sizing: border-box;
-        transition: all 250ms linear;
-     }
-     @media screen and (max-width: 550px) {
-        display: none;
+    
+    /** FF*/
+    input[type="range"]::-moz-range-progress {
+        background-color: #43e5f7; 
     }
+    input[type="range"]::-moz-range-track {  
+        background-color: #9a905d;
+    }
+    /* IE*/
+    input[type="range"]::-ms-fill-lower {
+        background-color: #43e5f7; 
+    }
+    input[type="range"]::-ms-fill-upper {  
+        background-color: #9a905d;
+    }
+
+    @media screen and (max-width: 550px) {
+            display: none;
+        }
 `
 
 export default TrackList

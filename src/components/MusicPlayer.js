@@ -200,15 +200,15 @@ const Wrapper = styled.section`
         .bottom {
             margin-bottom: 20px;
             padding: 0 15px;
-            .progress-bar {
+            input[type='range'] {
+                overflow: hidden;
                 width: 70%;
-                position: relative;
-                height: 5px;
-                outline: none;
-                border: none;
-                appearance: none;
-                border-radius: 10px;
+                -webkit-appearance: none;
                 background: rgba(255, 255, 255, 0.1);
+                border: none;
+                outline: none;
+                border-radius: 10px;
+                cursor: pointer;
             }
             .current-time, .duration {
                 color: #f1f1f1;
@@ -220,56 +220,50 @@ const Wrapper = styled.section`
 
     /* Chrome & Safari */
     .bottom {
-        .progress-bar::before {
-            position: absolute;
-            content: '';
-            top: 0;
-            left: 0;
-            background: #848484;
-            width: var(--played-width);
-            height: 100%;
+    // Chrome & Safari
+        input[type='range']::-webkit-slider-runnable-track {
+            /* width: var(--played-width); */
+            height: 10px;
             border-radius: 10px;
-            z-index: 2;
-            transition: all 0.3s ease;
+            background: #848484;
         }
-        .progress-bar::-webkit-slider-thumb {
+        
+        input[type='range']::-webkit-slider-thumb {
+            width: 10px;
             -webkit-appearance: none;
+            /* height: 100%; */
             width: 15px;
             height: 15px;
             border-radius: 50%;
             border: none;
-            outline: none;
+            margin: -2px 0 0 0;
+            background: #f1f1f1;
+            border-radius: 5px;
+            transition: all 250ms linear;
+            box-sizing: border-box;
+            box-shadow: -1080px 0 0 1080px #49e12e;
+            cursor: pointer;
         }
     }
-    /* Firefox */
+    
     .bottom {
-        .progress-bar::-moz-range-track {
-            width: 78%;
-            height: 5px;
-            outline: none;
-            border: none;
-            appearance: none;
-            border-radius: 10px;
-            background: rgba(255,255,255,0.1);
-            cursor: pointer
+        /** FF*/
+        input[type="range"]::-moz-range-progress {
+            background-color: #43e5f7; 
         }
-        .progress-bar::-moz-range-progress {
-            background: #848484;
-            width:var(--played-width);
-            height: 100%;
-            border-radius: 10px;
-            z-index: 2;
-            transition: all 0.3s ease;
+        input[type="range"]::-moz-range-track {  
+            background-color: #9a905d;
         }
-        .progress-bar::-moz-range-thumb {
-            -webkit-appearance: none;
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            border: none;
-            outline: none;
+        /* IE*/
+        input[type="range"]::-ms-fill-lower {
+            background-color: #43e5f7; 
+        }
+        input[type="range"]::-ms-fill-upper {  
+            background-color: #9a905d;
         }
     }
+   
+   
 
 `
 export default MusicPlayer

@@ -35,18 +35,21 @@ const MusicPlayer = ({ currentSong, changeFavourite }) => {
         }
     }
     //CHange Progress bar during audio play
+    //here we just changing value of our progressbar value by assing it to current time of song in audioplayer
     const whilePlaying = () => {
         progressBar.current.value = audioPlayer.current.currentTime;
         changeCurrentTime();
         //needs to run more than once
         animationRef.current = requestAnimationFrame(whilePlaying)
     }
+    //set current time to progressbar value thats how we will update state and trigger rerender
     const changeCurrentTime = () => {
-        progressBar.current.style.setProperty(
-            '--played-width',
-            `${(progressBar.current.value / duration) * 100}%`);
+        // progressBar.current.style.setProperty(
+        //     '--played-width',
+        //     `${(progressBar.current.value / duration) * 100}%`);
         setCurrentTime(progressBar.current.value);
     }
+    //
     const changeProgress = () => {
         audioPlayer.current.currentTime = progressBar.current.value;
         changeCurrentTime();

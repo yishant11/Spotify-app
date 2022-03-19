@@ -3,12 +3,15 @@ import styled from 'styled-components'
 import { BsFillVolumeUpFill, BsMusicNoteList } from 'react-icons/bs';
 import { FaDesktop } from 'react-icons/fa'
 import track from '../img/track.png'
+import { useGlobalContext } from '../contexts/context';
 const TrackList = () => {
+    const { currentSong } = useGlobalContext();
+    console.log(currentSong)
     return (
         <Wrapper className='tracklist'>
             <div className="top">
                 <img src={track} alt="track name" />
-                <p>sample name <span>artist</span> </p>
+                <p>{currentSong.songName} <span>{currentSong.artist}</span> </p>
             </div>
             <div className="bottom">
                 <i><BsFillVolumeUpFill /></i>

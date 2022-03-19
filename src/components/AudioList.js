@@ -1,33 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import styled from 'styled-components'
-import songs from '../assets/songs'
 import MusicPlayer from './MusicPlayer'
 import SingleSong from './SingleSong'
+import { useGlobalContext } from '../contexts/context'
 
 const AudioList = () => {
-    const [songsList, setSongsList] = useState(songs);
-    const [currentSong, setCurrentSong] = useState(songs[0]);
-    //change currentSong
-    const changeSong = (id) => {
-        const newSong = songsList.find(item => item.id === id);
-        setCurrentSong(newSong);
-    }
-    //change favourite
-    const changeFavourite = (id) => {
-        //find song by finding id of clicked item, and change favourite status of this song
-        const newSongs = songsList.map(song => {
-            if (song.id === id) {
-
-                return { ...song, favourite: !song.favourite }
-            }
-            else {
-                return song;
-            }
-        })
-        setSongsList(newSongs);
-    }
-
+    const { songsList, currentSong, changeSong, changeFavourite } = useGlobalContext();
 
 
     return (

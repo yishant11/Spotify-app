@@ -20,6 +20,7 @@ const MenuList = ({ title, objectList }) => {
                     return (
                         // add active class if it have same name as in state
                         <li className={active === name ? 'active' : null} onClick={() => handleClick(id)} key={id}>
+                            {/* eslint-disable-next-line */}
                             <a href="#">
                                 <i>
                                     {icon}

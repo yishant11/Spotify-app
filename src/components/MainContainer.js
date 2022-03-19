@@ -30,18 +30,23 @@ const MainContainer = () => {
             <div className="menutabs">
                 <ul>
                     <li>
+                        {/* eslint-disable-next-line */}
                         <a href="#">Popular</a>
                     </li>
                     <li>
+                        {/* eslint-disable-next-line */}
                         <a href="#">Albums</a>
                     </li>
                     <li>
+                        {/* eslint-disable-next-line */}
                         <a href="#">Songs</a>
                     </li>
                     <li>
+                        {/* eslint-disable-next-line */}
                         <a href="#">Fans</a>
                     </li>
                     <li>
+                        {/* eslint-disable-next-line */}
                         <a href="#">About</a>
                     </li>
                 </ul>

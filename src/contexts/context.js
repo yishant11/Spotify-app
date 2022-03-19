@@ -11,11 +11,12 @@ const AppProvider = ({ children }) => {
     //current active song
     const [currentSong, setCurrentSong] = useState(songs[indexOfSong]);
 
-
+    console.log(songsList.length)
     //change currentSong
     const changeSong = (id) => {
         const newSong = songsList.find(item => item.id === id);
         setCurrentSong(newSong);
+        setIndexOfSong(id);
     }
     //change favourite state of song
     const changeFavourite = (id) => {
@@ -111,19 +112,32 @@ const AppProvider = ({ children }) => {
     }
 
     // AUTO PLAY FUNCTIONALITY
+    //if song current time reached its duration increase value of song index and set new song with this index
     useEffect(() => {
         if (currentTime >= duration) {
             setIndexOfSong((oldIndex) => {
-                return oldIndex + 1;
+                //check our boundaries so we wont go past our max of songs
+                if (oldIndex >= songsList.length - 1) {
+                    audioPlayer.current.pause();
+                } else {
+                    return oldIndex + 1;
+                }
             })
             setCurrentSong(songsList[indexOfSong])
+
         }
+
     }, [currentTime])
 
+    //every time index changes automatically switch to next song and play it
+    //dont start to play it on page load hence why indexOfSong !== 0 and dont play just on click on songs, thats why we should be in playing state
     useEffect(() => {
-        audioPlayer.current.pause();
-        audioPlayer.current.play();
-    }, [currentSong, audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
+        if (indexOfSong !== 0 && isPlaying) {
+            audioPlayer.current.pause();
+            audioPlayer.current.play();
+            animationRef.current = requestAnimationFrame(whilePlaying)
+        }
+    }, [indexOfSong, audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
 
 
 

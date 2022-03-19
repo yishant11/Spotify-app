@@ -11,6 +11,14 @@ const MusicPlayer = ({ currentSong }) => {
         setisLoved(!isLoved)
     }
 
+    // if (isNaN(duration) || !duration || !currentTime) {
+    //     return (
+    //         <div>
+    //             Loading...
+    //         </div>
+    //     )
+    // }
+
 
     return (
         <Wrapper>

@@ -6,7 +6,6 @@ import track from '../img/track.png'
 import { useGlobalContext } from '../contexts/context';
 const TrackList = () => {
     const { currentSong } = useGlobalContext();
-    console.log(currentSong)
     return (
         <Wrapper className='tracklist'>
             <div className="top">

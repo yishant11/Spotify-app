@@ -24,7 +24,9 @@ const Banner = () => {
                         </p>
                     </div>
                     <div className="right">
+                        {/* eslint-disable-next-line */}
                         <a href="#">Play</a>
+                        {/* eslint-disable-next-line */}
                         <a href="#">
                             <i><FaCheck /></i>
                             Following

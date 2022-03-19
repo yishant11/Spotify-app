@@ -118,13 +118,14 @@ const AppProvider = ({ children }) => {
             setIndexOfSong((oldIndex) => {
                 //check our boundaries so we wont go past our max of songs
                 if (oldIndex >= songsList.length - 1) {
-                    audioPlayer.current.pause();
+                    setIndexOfSong(1)
                 } else {
                     return oldIndex + 1;
                 }
             })
-            setCurrentSong(songsList[indexOfSong])
-
+            if (indexOfSong !== songsList.length) {
+                setCurrentSong(songsList[indexOfSong])
+            }
         }
 
     }, [currentTime])

@@ -11,7 +11,6 @@ const AppProvider = ({ children }) => {
     //current active song
     const [currentSong, setCurrentSong] = useState(songs[indexOfSong]);
 
-    console.log(songsList.length)
     //change currentSong
     const changeSong = (id) => {
         const newSong = songsList.find(item => item.id === id);
@@ -48,6 +47,8 @@ const AppProvider = ({ children }) => {
     const progressBar = useRef();
     //animation ref
     const animationRef = useRef();
+    //ref for audio volume input
+    const audioVolume = useRef();
 
     //Play/pause functionality
     const changePlayState = () => {
@@ -59,6 +60,16 @@ const AppProvider = ({ children }) => {
             audioPlayer.current.pause();
             cancelAnimationFrame(animationRef.current)
         }
+    }
+
+    // CHange Volume
+    const changeVolume = () => {
+
+        //get audioVolume refference and delete it by 100 so we get values like 0.1 0.2 1 etc
+        const convertedVolume = audioVolume.current.value / 100;
+
+        audioPlayer.current.volume = convertedVolume;
+
     }
 
     //CHange Progress bar during audio play
@@ -158,7 +169,9 @@ const AppProvider = ({ children }) => {
         changePlayState,
         changeProgress,
         setDuration,
-        CalculateTime
+        CalculateTime,
+        audioVolume,
+        changeVolume
     }}>
         {children}
     </AppContext.Provider>

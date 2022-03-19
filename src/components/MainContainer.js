@@ -8,7 +8,7 @@ const MainContainer = () => {
     //just testing different approach
     useEffect(() => {
         const allLis = document.querySelectorAll('.menutabs li')
-        console.log(allLis)
+
         allLis.forEach(item => {
             item.addEventListener('click', (e) => {
                 //get clicked element

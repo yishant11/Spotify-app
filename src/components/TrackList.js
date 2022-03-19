@@ -5,7 +5,7 @@ import { FaDesktop } from 'react-icons/fa'
 import track from '../img/track.png'
 import { useGlobalContext } from '../contexts/context';
 const TrackList = () => {
-    const { currentSong } = useGlobalContext();
+    const { currentSong, audioVolume, changeVolume } = useGlobalContext();
     return (
         <Wrapper className='tracklist'>
             <div className="top">
@@ -14,7 +14,7 @@ const TrackList = () => {
             </div>
             <div className="bottom">
                 <i><BsFillVolumeUpFill /></i>
-                <input type="range" />
+                <input onChange={changeVolume} ref={audioVolume} type="range" />
                 <i><BsMusicNoteList /></i>
                 <i><FaDesktop /></i>
             </div>

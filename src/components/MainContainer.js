@@ -151,7 +151,12 @@ const Wrapper = styled.section`
     }
 
     @media screen and (max-width: 500px){
-        min-width: 320px;
+        min-width: 250px;
+        .menutabs {
+            ul {
+                padding-left: 5px;
+            }
+        }
     }
     
     

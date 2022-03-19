@@ -41,7 +41,8 @@ const Wrapper = styled.div`
     height: 300px;
     position: relative;
     .banner-img {
-        position: absolute;
+        /* position: absolute;
+        z-index: -2; */
         top: 0;
         left: 0;
         width: 100%;

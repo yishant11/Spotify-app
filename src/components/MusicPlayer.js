@@ -88,6 +88,7 @@ const MusicPlayer = ({ currentSong, changeFavourite }) => {
         <Wrapper>
             <div className="song-image">
                 <img src={imgSrc} alt={artist} />
+
             </div>
             <div className="song-attributes">
                 <audio
@@ -137,6 +138,19 @@ const MusicPlayer = ({ currentSong, changeFavourite }) => {
                         {(duration && !isNaN(duration) ? CalculateTime(duration) : '00:00')}
                     </div>
                 </div>
+                <div className="mobile-download">
+                    <div className="favourited" onClick={() => {
+                        changeLoved()
+                    }}>
+                        {isLoved ? <i><FaHeart /></i> : <i><FaRegHeart /></i>}
+                    </div>
+                    <div className="download">
+                        <i><BsDownload /></i>
+                    </div>
+                    <div className="share">
+                        <i><FaShareAlt /></i>
+                    </div>
+                </div>
             </div>
         </Wrapper>
     )
@@ -153,6 +167,7 @@ const Wrapper = styled.section`
         border-radius: 10px;
         overflow: hidden;
         box-shadow: 0px 0px 20px rgba(0,0,0,0.4);
+        
         img {
             width: 100%;
             height: 100%;
@@ -226,6 +241,17 @@ const Wrapper = styled.section`
                 font-weight: bold;
             }
         }
+        .mobile-download{
+            display: none;
+            color: #595959;
+            font-size: 16px;
+            cursor: pointer;
+            align-items: center;
+                i {
+                    margin: 0px 15px;
+                    font-size: 18px;
+                }
+        }
     }
 
     /* Chrome & Safari */
@@ -275,9 +301,10 @@ const Wrapper = styled.section`
    
     @media screen and (max-width: 950px) {
         .song-image {
-            width: 40px;
-            min-width: 40px;
-            height: 40px;
+            width:70px;
+            min-width: 70px;
+            height: 70px;
+            
         }
         .song-attributes {
             padding-left: 10px;
@@ -289,10 +316,50 @@ const Wrapper = styled.section`
                       }
                 }
             }
+           
+            .bottom {
+                padding-left: 0;
+            }
+        }
+        
+        
+    }
+    @media screen and (max-width: 470px) {
+        .song-attributes {
+            .top {
+                /* display: grid;
+                grid-template-columns: auto; */
+                display: block;
+                .left, .right {
+                    display: none;
+                }
+                .middle {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                }
+                .playPause {
+                    display: grid;
+                    place-items: center;
+                    margin-left: 10px;
+                }
+            }
+            .mobile-download{
+                    display: flex;
+                    justify-content: flex-start;
+                    color: #595959;
+                    font-size: 16px;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: flex-start;
+                    i {
+                        margin: 0px 15px;
+                        font-size: 18px;
+                    }
+            }
         }
         
     }
-   
+
 
 `
 export default MusicPlayer

@@ -94,6 +94,9 @@ const Wrapper = styled.section`
         max-width: 60px;
         min-width: 60px;
     }
+    @media screen and (max-width: 450px) {
+        display: none;
+    }
 `
 
 export default RightMenu

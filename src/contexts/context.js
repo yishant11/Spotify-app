@@ -101,21 +101,7 @@ const AppProvider = ({ children }) => {
         //     setCurrentSong(songsList[indexOfSong])
         // }
     }
-    //skip 10 sec of current time
-    const stepForward = () => {
-        setCurrentTime(oldCurrentTime => {
-            const newTime = Number(oldCurrentTime) + 10;
-            console.log(newTime)
-            return newTime;
-        })
-    }
-    const stepBackwards = () => {
-        setCurrentTime(oldCurrentTime => {
-            const newTime = Number(oldCurrentTime) - 10;
-            console.log(newTime)
-            return newTime;
-        })
-    }
+
 
     //CHange Progress bar during audio play
     //here we just changing value of our progressbar value by assing it to current time of song in audioplayer
@@ -215,8 +201,7 @@ const AppProvider = ({ children }) => {
         changeVolume,
         nextSong,
         previousSong,
-        stepBackwards,
-        stepForward
+
     }}>
         {children}
     </AppContext.Provider>

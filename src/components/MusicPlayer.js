@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { FaRegHeart, FaHeart, FaStepBackward, FaBackward, FaPlay, FaPause, FaForward, FaStepForward, FaShareAlt } from 'react-icons/fa'
+import { FaRegHeart, FaHeart, FaStepBackward, FaPlay, FaPause, FaStepForward, FaShareAlt } from 'react-icons/fa'
 import { BsDownload } from 'react-icons/bs'
 import { useGlobalContext } from '../contexts/context'
 const MusicPlayer = ({ currentSong }) => {
     const { favourite, song, imgSrc, artist } = currentSong;
     const [isLoved, setisLoved] = useState(favourite);
-    const { isPlaying, duration, currentTime, audioPlayer, progressBar, changePlayState, CalculateTime, changeProgress, nextSong, previousSong, stepForward, stepBackwards } = useGlobalContext();
+    const { isPlaying, duration, currentTime, audioPlayer, progressBar, changePlayState, CalculateTime, changeProgress, nextSong, previousSong } = useGlobalContext();
     const changeLoved = () => {
         setisLoved(!isLoved)
     }
@@ -46,13 +46,11 @@ const MusicPlayer = ({ currentSong }) => {
                     <div className="middle">
                         <div className="back">
                             <i onClick={previousSong}><FaStepBackward /></i>
-                            <i onClick={stepBackwards}><FaBackward /></i>
                         </div>
                         <div className="playPause" onClick={() => changePlayState()}>
                             {isPlaying ? <i><FaPause /></i> : <i><FaPlay /></i>}
                         </div>
                         <div className="forward">
-                            <i onClick={stepForward}><FaForward /></i>
                             <i onClick={nextSong}><FaStepForward /></i>
                         </div>
                     </div>
@@ -141,6 +139,15 @@ const Wrapper = styled.section`
         .top {
             padding-bottom: 10px;
             .middle {
+                .back {
+                    margin-right: 20px;
+                    i {
+                        color: #9a9a9a !important
+                    }
+                }
+                .forward {
+                    margin-left: 20px;
+                }
                 .back i:nth-child(2), .forward i:nth-child(1) {
                     color: #9a9a9a !important;
                 }
@@ -157,6 +164,7 @@ const Wrapper = styled.section`
                 align-items: center;
                 color: #000;
             }
+            
         }
         .bottom {
             margin-bottom: 20px;

@@ -91,7 +91,7 @@ const Wrapper = styled.section`
             color: #848484;
         }
     }
-    @media screen and (max-width: 550px) {
+    @media screen and (max-width: 950px) {
         width: 64px;
         .search-box {
             display: none;

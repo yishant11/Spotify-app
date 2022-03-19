@@ -63,6 +63,11 @@ const Wrapper = styled.section`
         overflow-x: hidden;
     }
     
+    @media screen and (max-width: 550px){
+        .songs-container {
+            height: 140px;
+        }
+    }
     
 `
 

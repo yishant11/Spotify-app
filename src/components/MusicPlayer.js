@@ -273,6 +273,25 @@ const Wrapper = styled.section`
         }
     }
    
+    @media screen and (max-width: 950px) {
+        .song-image {
+            width: 40px;
+            min-width: 40px;
+            height: 40px;
+        }
+        .song-attributes {
+            padding-left: 10px;
+            .top {
+                .left, .middle, .bottom {
+                    i {
+                        margin: 0px 4px;
+                        font-size: 15px;
+                      }
+                }
+            }
+        }
+        
+    }
    
 
 `

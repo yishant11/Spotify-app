@@ -107,7 +107,7 @@ const Wrapper = styled.div`
         background-color: #848484;
     }
 
-    @media screen and (max-width: 550px) {
+    @media screen and (max-width: 950px) {
             display: none;
         }
 `

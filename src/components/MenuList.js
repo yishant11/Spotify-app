@@ -94,7 +94,10 @@ const Wrapper = styled.div`
         opacity: 1;
         transition: 0.5s;
     }
-     @media screen and (max-width: 550px) {
+     @media screen and (max-width: 950px) {
+        h2 {
+            display: none;
+        }
         span {
             display: none;
         };

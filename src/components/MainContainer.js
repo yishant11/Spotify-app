@@ -23,7 +23,7 @@ const MainContainer = () => {
         })
     }, [])
     return (
-        <Wrapper>
+        <Wrapper className='main-container'>
             {/* Banner */}
             <Banner />
             {/* TABS */}
@@ -128,6 +128,32 @@ const Wrapper = styled.section`
             }
         }
     }
+    
+
+    @media screen and (max-width: 950px) {
+        min-width: 380px;
+        .menutabs {
+            padding: 10px 5px;
+            ul {
+                li {
+                    margin: 0px 8px;
+                }
+                li:before {
+                    bottom: -10px;
+                    height: 3px;
+                }
+            }
+            p {
+                display: none;
+            }
+
+        }
+    }
+
+    @media screen and (max-width: 500px){
+        min-width: 320px;
+    }
+    
     
 `
 export default MainContainer

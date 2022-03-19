@@ -147,6 +147,38 @@ const Wrapper = styled.div`
         height: 5rem;
         background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
     }
+    @media screen and (max-width: 550px) {
+        .content {
+            padding: 10px 15px;
+            .top {
+                p {
+                    font-size: 12px;
+                }
+            }
+            .bottom {
+                .left {
+                    p {
+                        font-size: 12px;
+                    }
+                    .name {
+                        h2 {
+                            font-size: 25px;
+                        }
+                    }
+                }
+                .right {
+                    padding: 5px 15px;
+                    font-size: 12px;
+                    margin: 0 10px;
+                    a {
+                        padding: 10px 15px;
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+        
+    }
 `
 
 export default Banner

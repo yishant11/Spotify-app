@@ -116,6 +116,28 @@ const Wrapper = styled.div`
         color: #f1f1f1;
         transition: 0.3s;
     }
+    @media screen and (max-width:950px) {
+        .songs {
+            .song {
+                .song-info {
+                   
+                    .song-name {
+                         display: block;
+                        font-size: 12px;
+                        text-align: center;
+                        span {
+                            display: none;
+                        }
+                    }
+                    .hits {
+                        .hit {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 `
 

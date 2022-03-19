@@ -71,7 +71,7 @@ const Wrapper = styled.div`
     .trash {
          cursor: pointer;   
     }
-     @media screen and (max-width: 550px) {
+     @media screen and (max-width: 950px) {
         display: none;
     }
     

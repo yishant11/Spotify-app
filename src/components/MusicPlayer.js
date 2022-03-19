@@ -249,17 +249,17 @@ const Wrapper = styled.section`
     .bottom {
         /** FF*/
         input[type="range"]::-moz-range-progress {
-            background-color: #43e5f7; 
+            background-color: #49e12e; 
         }
         input[type="range"]::-moz-range-track {  
-            background-color: #9a905d;
+            background-color: #848484;
         }
         /* IE*/
         input[type="range"]::-ms-fill-lower {
-            background-color: #43e5f7; 
+            background-color: #49e12e; 
         }
         input[type="range"]::-ms-fill-upper {  
-            background-color: #9a905d;
+            background-color: #848484;
         }
     }
    

@@ -9,7 +9,7 @@ const AppProvider = ({ children }) => {
     //state for index of current song
     const [indexOfSong, setIndexOfSong] = useState(0);
     //current active song
-    const [currentSong, setCurrentSong] = useState(songs[indexOfSong]);
+    const [currentSong, setCurrentSong] = useState(songsList[indexOfSong]);
 
     //change currentSong
     const changeSong = (id) => {
@@ -71,6 +71,51 @@ const AppProvider = ({ children }) => {
         audioPlayer.current.volume = convertedVolume;
 
     }
+    // MUSIC PLAYER BUTTONS FUNCTIONALITY
+    const nextSong = () => {
+        console.log('next');
+        setIndexOfSong(oldIndex => {
+            if (oldIndex >= songsList.length) {
+                return 1
+            } else {
+                return oldIndex + 1;
+            }
+        })
+
+        if (indexOfSong !== songsList.length) {
+            setCurrentSong(songsList[indexOfSong])
+        }
+    }
+    const previousSong = () => {
+        console.log('prev')
+        setIndexOfSong(oldIndex => {
+            if (oldIndex <= 1) {
+                return 0;
+            }
+            else {
+                return oldIndex - 1;
+            }
+        })
+        setCurrentSong(songsList[indexOfSong])
+        // if (indexOfSong !== 0) {
+        //     setCurrentSong(songsList[indexOfSong])
+        // }
+    }
+    //skip 10 sec of current time
+    const stepForward = () => {
+        setCurrentTime(oldCurrentTime => {
+            const newTime = Number(oldCurrentTime) + 10;
+            console.log(newTime)
+            return newTime;
+        })
+    }
+    const stepBackwards = () => {
+        setCurrentTime(oldCurrentTime => {
+            const newTime = Number(oldCurrentTime) - 10;
+            console.log(newTime)
+            return newTime;
+        })
+    }
 
     //CHange Progress bar during audio play
     //here we just changing value of our progressbar value by assing it to current time of song in audioplayer
@@ -93,12 +138,7 @@ const AppProvider = ({ children }) => {
         changeCurrentTime();
     }
 
-    //useEffect for disabling play state if song ends
-    // useEffect(() => {
-    //     if (currentTime >= duration) {
-    //         setIsPlaying(false);
-    //     }
-    // }, [currentTime])
+
 
     //useEffect for audio player
     //we need to execute useeffect each time when audioplayer is loaded and we changing currentSong
@@ -129,7 +169,7 @@ const AppProvider = ({ children }) => {
             setIndexOfSong((oldIndex) => {
                 //check our boundaries so we wont go past our max of songs
                 if (oldIndex >= songsList.length - 1) {
-                    setIndexOfSong(1)
+                    return 0
                 } else {
                     return oldIndex + 1;
                 }
@@ -139,17 +179,18 @@ const AppProvider = ({ children }) => {
                 setCurrentSong(songsList[indexOfSong])
             }
         }
-
+        // eslint-disable-next-line
     }, [currentTime])
 
     //every time index changes automatically switch to next song and play it
     //dont start to play it on page load hence why indexOfSong !== 0 and dont play just on click on songs, thats why we should be in playing state
     useEffect(() => {
-        if (indexOfSong !== 0 && isPlaying) {
+        if (isPlaying) {
             audioPlayer.current.pause();
             audioPlayer.current.play();
             animationRef.current = requestAnimationFrame(whilePlaying)
         }
+        // eslint-disable-next-line
     }, [indexOfSong, audioPlayer?.current?.loadedmetadata, audioPlayer?.current?.readyState])
 
 
@@ -171,7 +212,11 @@ const AppProvider = ({ children }) => {
         setDuration,
         CalculateTime,
         audioVolume,
-        changeVolume
+        changeVolume,
+        nextSong,
+        previousSong,
+        stepBackwards,
+        stepForward
     }}>
         {children}
     </AppContext.Provider>

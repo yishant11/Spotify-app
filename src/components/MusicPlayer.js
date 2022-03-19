@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { FaRegHeart, FaHeart, FaStepBackward, FaBackward, FaPlay, FaPause, FaForward, FaStepForward, FaShareAlt } from 'react-icons/fa'
 import { BsDownload } from 'react-icons/bs'
@@ -6,7 +6,7 @@ import { useGlobalContext } from '../contexts/context'
 const MusicPlayer = ({ currentSong }) => {
     const { favourite, song, imgSrc, artist } = currentSong;
     const [isLoved, setisLoved] = useState(favourite);
-    const { isPlaying, duration, currentTime, audioPlayer, progressBar, changePlayState, CalculateTime, changeProgress } = useGlobalContext();
+    const { isPlaying, duration, currentTime, audioPlayer, progressBar, changePlayState, CalculateTime, changeProgress, nextSong, previousSong, stepForward, stepBackwards } = useGlobalContext();
     const changeLoved = () => {
         setisLoved(!isLoved)
     }
@@ -45,15 +45,15 @@ const MusicPlayer = ({ currentSong }) => {
                     </div>
                     <div className="middle">
                         <div className="back">
-                            <i><FaStepBackward /></i>
-                            <i><FaBackward /></i>
+                            <i onClick={previousSong}><FaStepBackward /></i>
+                            <i onClick={stepBackwards}><FaBackward /></i>
                         </div>
                         <div className="playPause" onClick={() => changePlayState()}>
                             {isPlaying ? <i><FaPause /></i> : <i><FaPlay /></i>}
                         </div>
                         <div className="forward">
-                            <i><FaForward /></i>
-                            <i><FaStepForward /></i>
+                            <i onClick={stepForward}><FaForward /></i>
+                            <i onClick={nextSong}><FaStepForward /></i>
                         </div>
                     </div>
                     <div className="right">

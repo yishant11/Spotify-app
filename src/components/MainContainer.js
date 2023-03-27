@@ -45,10 +45,6 @@ const MainContainer = () => {
                         {/* eslint-disable-next-line */}
                         <a href="#">Fans</a>
                     </li>
-                    <li>
-                        {/* eslint-disable-next-line */}
-                        <a href="#">About</a>
-                    </li>
                 </ul>
                 <p>
                     <i>
